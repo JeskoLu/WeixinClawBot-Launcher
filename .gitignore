@@ -1,0 +1,27 @@
+# ---- Sensitive: NEVER commit these ----
+.env
+*.env
+.env.*
+!*.env.example
+
+# Hermes runtime data (contains account credentials, tokens, session data)
+hermes_home/
+HERMES_HOME/
+weixin/
+gateway-service/
+logs/
+sessions/
+
+# ---- Build artifacts ----
+build/
+dist/
+spec/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+
+# ---- Local tools ----
+*.log
+.DS_Store
+Thumbs.db

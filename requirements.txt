@@ -1,0 +1,3 @@
+# Python dependencies for developing/building the launcher
+# (runtime uses only the standard library — no deps needed to run the source)
+pyinstaller>=6.0

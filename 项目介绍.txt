@@ -1,0 +1,47 @@
+═══════════════════════════════════════════════════════════════
+  WeixinClawBot - Hermes 微信机器人一键连接启动器（开源版）
+═══════════════════════════════════════════════════════════════
+
+【这是什么？】
+一套 Windows 工具，让你的 Hermes Agent 微信机器人：
+  1. 一键连接 —— 双击 exe 即可启动网关，微信立刻能用
+  2. 永不掉线 —— 守护脚本每 30 秒检查一次，崩溃自动重启
+  3. 开机自启 —— 登录 Windows 后自动上线，无需手动操作
+
+【包含文件】
+  src/weixin_launcher.py           一键连接启动器（Python 源码）
+  src/Hermes_Gateway_Watchdog.vbs  守护脚本（崩溃自愈）
+  src/Hermes_Gateway_Startup.vbs   开机自启引导
+  assets/icon.ico                  程序图标
+  requirements.txt                 Python 依赖
+  README.md                        完整使用文档
+
+【快速使用】
+  方式一（源码）:
+    pip install -r requirements.txt
+    python src/weixin_launcher.py
+
+  方式二（打包 exe）:
+    pip install pyinstaller
+    pyinstaller --onefile --noconsole --icon assets/icon.ico \
+      --name "WeixinClawBot一键连接" src/weixin_launcher.py
+
+  方式三（开机自启 + 自愈）:
+    1. 把 src/ 下的 vbs 脚本复制到 <HERMES_HOME>/gateway-service/
+    2. 注册表 Run 键或计划任务注册开机启动（详见 README.md）
+
+【前置条件】
+  - Windows 10/11
+  - 已安装 Hermes Agent（https://hermes-agent.nousresearch.com）
+  - 已配置微信平台：hermes gateway setup → Weixin → 扫码
+
+【隐私说明】
+  本仓库代码已做隐私清洗：
+  - 不含任何微信账号 ID / Token / 凭证
+  - 不含用户个人路径（通过 HERMES_HOME 环境变量定位）
+  请勿上传 <HERMES_HOME>/.env 文件！
+
+【License】
+  MIT License
+
+═══════════════════════════════════════════════════════════════
