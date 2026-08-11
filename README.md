@@ -1,12 +1,14 @@
 # WeixinClawBot Launcher
 
-> Windows 上的 Hermes Agent 微信网关一键连接启动器，附带崩溃恢复守护脚本。
+> **WeixinClawBot Launcher 是一款面向 Windows 的 Hermes Agent 微信网关故障恢复工具。** 当 WeixinClawBot 出现掉线、连接异常或 Gateway 意外停止时，双击即可自动检测运行状态并尝试恢复服务；配套守护脚本会持续监测网关，在异常退出后自动重新启动。
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-blue)](#系统要求)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Download](https://img.shields.io/badge/download-latest%20release-orange)](https://github.com/JeskoLu/WeixinClawBot-Launcher/releases/latest)
 
 ## 项目用途
+
+本工具主要用于恢复因网关停止或连接异常造成的离线问题，不负责修复 Hermes Agent 或 WeixinClawBot 本身的代码故障。
 
 WeixinClawBot Launcher 面向已经安装并配置好 **Hermes Agent + Weixin** 的 Windows 用户：
 

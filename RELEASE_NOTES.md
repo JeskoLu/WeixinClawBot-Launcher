@@ -33,7 +33,7 @@
 
 ```text
 f919cbbe445e48ff40422044954118d44ce4e1955e32190762eefbc4a356019b  WeixinClawBot-OneClick.exe
-f1efa76fa43bd01e0520da4d602de7a7c7296484fc6fd5d352310d01499075a6  WeixinClawBot-Launcher-v1.0.0.zip
+495bb29f21c4e98ced329406f4d963c50bbd7211474323d5b52bc9abd1e7d5e4  WeixinClawBot-Launcher-v1.0.0.zip
 ```
 
 ### 使用前提
