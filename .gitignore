@@ -21,6 +21,11 @@ __pycache__/
 *.pyc
 *.pyo
 
+# Local release assets are uploaded to GitHub Releases, not committed
+release/*.exe
+release/*.zip
+release/SHA256SUMS.txt
+
 # ---- Local tools ----
 *.log
 .DS_Store

@@ -1,116 +1,198 @@
-# WeixinClawBot — Hermes WeChat Gateway Launcher
+# WeixinClawBot Launcher
 
-> 一键连接 Hermes Agent 微信机器人的启动器 + 崩溃自愈守护脚本（Windows）
+> Windows 上的 Hermes Agent 微信网关一键连接启动器，附带崩溃自愈守护脚本。
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-blue)](#系统要求)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Download](https://img.shields.io/badge/download-latest%20release-orange)](https://github.com/JeskoLu/WeixinClawBot-Launcher/releases/latest)
 
-## 📖 项目简介
+## 项目用途
 
-这是一个面向 **Hermes Agent**（Nous Research 的开源 AI 智能体框架）的 Windows 工具集，包含两部分：
+WeixinClawBot Launcher 面向已经安装并配置好 **Hermes Agent + Weixin** 的 Windows 用户：
 
-1. **一键连接启动器**（`weixin_launcher.py` / 打包成 exe）— 双击即可检查并启动微信网关，弹窗显示连接结果
-2. **守护脚本**（`Hermes_Gateway_Watchdog.vbs`）— 每 30 秒检查网关进程，崩溃后自动重启，实现 7×24 小时在线
+- 双击 EXE 检查 Hermes Gateway 是否正在运行；
+- 网关未运行时，调用守护脚本自动启动；
+- 弹窗显示连接成功或失败；
+- 守护脚本每 30 秒检查一次，网关退出后自动重新拉起；
+- 可配合 Windows 登录自启，实现长期在线。
 
-配合 Hermes 的 **Weixin 适配器**（基于腾讯 iLink Bot API），让个人微信账号拥有一个 AI 机器人，随时随地用手机微信跟 AI 对话。
+> [!IMPORTANT]
+> 本项目不是 Hermes Agent 安装器，也不包含模型密钥、微信凭据或用户配置。第一次使用前，请先安装 Hermes Agent，并运行 `hermes gateway setup` 完成 Weixin 扫码绑定。
 
-## ✨ 功能特性
+## 快速使用
+
+### 1. 准备 Hermes Agent
+
+1. 从 [Hermes Agent 官方文档](https://hermes-agent.nousresearch.com/docs/) 安装 Hermes；
+2. 在终端运行：
+
+```text
+hermes gateway setup
+```
+
+3. 选择 **Weixin**，按照提示扫码完成绑定；
+4. 可用以下命令检查：
+
+```text
+hermes gateway status
+```
+
+### 2. 下载启动器
+
+打开 [Releases](https://github.com/JeskoLu/WeixinClawBot-Launcher/releases/latest)，下载：
+
+- `一键连接.exe`：单文件启动器；
+- `WeixinClawBot-Launcher-v1.0.0.zip`：包含 EXE、守护脚本和使用说明的完整包；
+- `SHA256SUMS.txt`：校验文件。
+
+### 3. 安装守护脚本
+
+将以下两个文件复制到：
+
+```text
+%LOCALAPPDATA%\hermes\gateway-service\
+```
+
+文件：
+
+```text
+Hermes_Gateway_Watchdog.vbs
+Hermes_Gateway_Startup.vbs
+```
+
+如果你设置了 `HERMES_HOME`，则复制到：
+
+```text
+%HERMES_HOME%\gateway-service\
+```
+
+### 4. 一键连接
+
+双击 `一键连接.exe`。连接成功后，即可在手机微信中向机器人发送消息。
+
+更详细的初学者说明见：[使用说明.md](使用说明.md)。
+
+## 功能特性
 
 | 功能 | 说明 |
-|------|------|
-| 🖱️ 一键连接 | 双击 exe，自动检查网关状态并启动 |
-| 🔄 崩溃自愈 | 守护脚本每 30 秒探活，网关挂了自动拉起 |
-| 🔒 单实例保护 | 启动前自动清理旧守护进程，不堆积 |
-| 🚀 开机自启 | 支持注册表 Run 键 / 计划任务两种方式 |
-| 📱 手机遥控 | 微信发消息即可与 Hermes AI 对话 |
+|---|---|
+| 一键检查 | 自动识别 Hermes 目录并检查 Gateway 进程 |
+| 自动启动 | 网关未运行时调用守护脚本拉起 |
+| 崩溃自愈 | Watchdog 每 30 秒检查并自动重启 |
+| 隐藏运行 | 启动与守护过程不常驻命令行窗口 |
+| 隐私清洗 | 仓库和 EXE 不包含用户名、微信 ID、Token、API Key |
+| 开源可审计 | Python 与 VBS 源码均可查看 |
 
-## 🛠️ 系统要求
+## 系统要求
 
-- Windows 10/11
-- Python 3.8+（打包 exe 需要 PyInstaller）
-- [Hermes Agent](https://hermes-agent.nousresearch.com) 已安装并完成 Weixin 平台配置
-  ```bash
-  pip install aiohttp cryptography
-  hermes gateway setup   # 选择 Weixin，扫码绑定微信
-  ```
+- Windows 10 或 Windows 11（x64）；
+- 已安装 [Hermes Agent](https://github.com/NousResearch/hermes-agent)；
+- 已通过 `hermes gateway setup` 配置 Weixin；
+- Hermes 默认目录为 `%LOCALAPPDATA%\hermes`，或已正确设置 `HERMES_HOME`。
 
-## 📦 快速开始
+## 项目结构
 
-### 方式一：直接运行源码
-
-```bash
-pip install -r requirements.txt
-python src/weixin_launcher.py
-```
-
-### 方式二：打包成 exe（免 Python 环境）
-
-```bash
-pip install pyinstaller
-pyinstaller --onefile --noconsole --icon assets/icon.ico \
-  --name "WeixinClawBot一键连接" src/weixin_launcher.py
-```
-
-打包后把 `dist/WeixinClawBot一键连接.exe` 放到桌面即可。
-
-### 方式三：安装守护脚本（开机自启 + 崩溃自愈）
-
-1. 将 `src/` 下的两个 `.vbs` 脚本复制到 `<HERMES_HOME>/gateway-service/`
-2. 注册开机自启（二选一）：
-
-   **注册表 Run 键（当前用户）：**
-   ```cmd
-   reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v HermesGatewayWatchdog /t REG_SZ /d "wscript.exe \"%LOCALAPPDATA%\hermes\gateway-service\Hermes_Gateway_Startup.vbs\"" /f
-   ```
-
-   **计划任务（需要管理员，支持开机即启）：**
-   ```powershell
-   schtasks /Create /TN "HermesGatewayWatchdog" /TR "wscript.exe %LOCALAPPDATA%\hermes\gateway-service\Hermes_Gateway_Startup.vbs" /SC ONLOGON /RL HIGHEST /F
-   ```
-
-3. 重启电脑验证：登录后约 1 分钟内网关自动上线
-
-## 📂 项目结构
-
-```
+```text
 WeixinClawBot-Launcher/
 ├── src/
-│   ├── weixin_launcher.py        # 一键连接启动器（主程序）
-│   ├── Hermes_Gateway_Watchdog.vbs   # 守护脚本（崩溃自愈）
-│   └── Hermes_Gateway_Startup.vbs    # 开机自启引导
+│   ├── weixin_launcher.py
+│   ├── Hermes_Gateway_Watchdog.vbs
+│   └── Hermes_Gateway_Startup.vbs
 ├── assets/
-│   └── icon.ico                  # 程序图标
-├── requirements.txt              # Python 依赖
-├── README.md                     # 本文件
-└── LICENSE                       # MIT 许可证
+│   └── icon.ico
+├── release/                 # 本地 Release 构建产物，不进入 Git 历史
+├── README.md
+├── 使用说明.md
+├── RELEASE_NOTES.md
+├── SECURITY.md
+├── requirements.txt
+└── LICENSE
 ```
 
-## 🧠 工作原理
+## 从源码运行
 
-```
-┌────────────┐   WebSocket/REST   ┌──────────────────┐
-│  手机微信   │ ◄────────────────► │  Hermes Gateway   │
-└────────────┘                    │  (iLink Bot API)  │
-                                  └────────┬─────────┘
-                                           │ 守护脚本每30秒探活
-                                           ▼
-                                  ┌──────────────────┐
-                                  │  Watchdog 守护    │
-                                  │  挂了自动重启     │
-                                  └──────────────────┘
+```text
+python src\weixin_launcher.py
 ```
 
-## ⚠️ 注意事项
+运行源码只使用 Python 标准库。
 
-- **隐私安全**：本项目只包含工具代码，**不含任何微信凭证**。请勿将 `<HERMES_HOME>/.env`（内含 `WEIXIN_ACCOUNT_ID`、`WEIXIN_TOKEN` 等敏感信息）提交到仓库
-- 守护脚本通过环境变量 `HERMES_HOME` 定位安装目录，未设置时回退到默认位置
-- 微信机器人基于 iLink Bot API，普通微信群消息可能无法送达，私聊正常
+## 自行打包 EXE
 
-## 🔗 相关链接
+```text
+python -m pip install -r requirements.txt
+python -m PyInstaller --onefile --noconsole --clean ^
+  --icon assets\icon.ico ^
+  --name "一键连接" src\weixin_launcher.py
+```
 
-- [Hermes Agent 官网](https://hermes-agent.nousresearch.com)
+生成文件位于：
+
+```text
+dist\一键连接.exe
+```
+
+## 工作原理
+
+```text
+手机微信
+   │
+   ▼
+Hermes Weixin Adapter
+   │
+   ▼
+Hermes Gateway  ◄──── Watchdog 每 30 秒探活
+   │                       │
+   └────────退出时─────────┘ 自动重启
+```
+
+## 常见问题
+
+### 弹窗提示连接失败
+
+依次检查：
+
+```text
+hermes doctor
+hermes gateway status
+hermes gateway run
+```
+
+日志通常位于：
+
+```text
+%LOCALAPPDATA%\hermes\logs\gateway.log
+```
+
+### EXE 被安全软件提示
+
+该文件由 PyInstaller 打包且未购买商业代码签名证书，部分安全软件可能产生误报。你可以：
+
+1. 校验 Release 中公布的 SHA-256；
+2. 阅读并自行打包仓库源码；
+3. 将文件提交到 VirusTotal 进行多引擎检测。
+
+### 能否把 `.env` 上传到仓库？
+
+不能。`.env` 可能包含模型密钥、微信账号信息和令牌，绝对不要提交或公开。
+
+## 安全与隐私
+
+- 本仓库不包含任何真实微信账号 ID、Token 或 API Key；
+- 路径通过 `HERMES_HOME`、`LOCALAPPDATA` 或当前用户目录解析；
+- `.gitignore` 已排除 Hermes 运行数据、日志、会话和环境变量文件；
+- 安全问题请参阅 [SECURITY.md](SECURITY.md)。
+
+## 相关链接
+
+- [Hermes Agent 官方文档](https://hermes-agent.nousresearch.com/docs/)
 - [Hermes Agent GitHub](https://github.com/NousResearch/hermes-agent)
-- [Hermes 文档 - Weixin 适配器](https://hermes-agent.nousresearch.com/docs)
+- [本项目 Releases](https://github.com/JeskoLu/WeixinClawBot-Launcher/releases)
 
-## 📄 License
+## 免责声明
 
-[MIT](LICENSE) © 2026
+本项目为社区工具，与 Nous Research 或腾讯无官方隶属关系。用户应遵守 Hermes Agent、微信及相关服务条款，并自行保管账号凭据。
+
+## License
+
+[MIT License](LICENSE)
