@@ -41,7 +41,7 @@ hermes gateway status
 
 打开 [Releases](https://github.com/JeskoLu/WeixinClawBot-Launcher/releases/latest)，下载：
 
-- `一键连接.exe`：单文件启动器；
+- `WeixinClawBot-OneClick.exe`：单文件启动器；
 - `WeixinClawBot-Launcher-v1.0.0.zip`：包含 EXE、守护脚本和使用说明的完整包；
 - `SHA256SUMS.txt`：校验文件。
 
@@ -68,7 +68,7 @@ Hermes_Gateway_Startup.vbs
 
 ### 4. 一键连接
 
-双击 `一键连接.exe`。连接成功后，即可在手机微信中向机器人发送消息。
+双击 `WeixinClawBot-OneClick.exe`。连接成功后，即可在手机微信中向机器人发送消息。
 
 更详细的初学者说明见：[使用说明.md](使用说明.md)。
 
@@ -123,13 +123,13 @@ python src\weixin_launcher.py
 python -m pip install -r requirements.txt
 python -m PyInstaller --onefile --noconsole --clean ^
   --icon assets\icon.ico ^
-  --name "一键连接" src\weixin_launcher.py
+  --name "WeixinClawBot-OneClick" src\weixin_launcher.py
 ```
 
 生成文件位于：
 
 ```text
-dist\一键连接.exe
+dist\WeixinClawBot-OneClick.exe
 ```
 
 ## 工作原理

@@ -30,7 +30,7 @@
 Release 提供 `SHA256SUMS.txt`。Windows PowerShell 可运行：
 
 ```powershell
-Get-FileHash .\一键连接.exe -Algorithm SHA256
+Get-FileHash .\WeixinClawBot-OneClick.exe -Algorithm SHA256
 ```
 
 结果应与 Release 中公布的值一致。

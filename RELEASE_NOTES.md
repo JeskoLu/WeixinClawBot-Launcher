@@ -16,7 +16,7 @@
 ### 下载建议
 
 - 初学者：下载 `WeixinClawBot-Launcher-v1.0.0.zip`；
-- 已安装守护脚本：可只下载 `一键连接.exe`；
+- 已安装守护脚本：可只下载 `WeixinClawBot-OneClick.exe`；
 - 下载后使用 `SHA256SUMS.txt` 核对完整性。
 
 ### 实测结果
@@ -32,8 +32,8 @@
 ### 发布文件 SHA-256
 
 ```text
-f919cbbe445e48ff40422044954118d44ce4e1955e32190762eefbc4a356019b  一键连接.exe
-8e21729598bf1b7b0e11ef1841969328a27080cabd0cb0e2e062f4c72031e1d4  WeixinClawBot-Launcher-v1.0.0.zip
+f919cbbe445e48ff40422044954118d44ce4e1955e32190762eefbc4a356019b  WeixinClawBot-OneClick.exe
+f1efa76fa43bd01e0520da4d602de7a7c7296484fc6fd5d352310d01499075a6  WeixinClawBot-Launcher-v1.0.0.zip
 ```
 
 ### 使用前提
