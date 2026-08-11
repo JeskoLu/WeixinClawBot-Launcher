@@ -1,6 +1,6 @@
 # WeixinClawBot Launcher
 
-> Windows 上的 Hermes Agent 微信网关一键连接启动器，附带崩溃自愈守护脚本。
+> Windows 上的 Hermes Agent 微信网关一键连接启动器，附带崩溃恢复守护脚本。
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-blue)](#系统要求)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
